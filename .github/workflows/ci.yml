@@ -2,9 +2,9 @@ name: DevOps Capstone CI Pipeline
 
 on:
   push:
-    branches: [*]   
+    branches: ['*']   
   pull_request:
-    branches:  [*]
+    branches:  ['*']
 
 jobs:
   validate-and-build:
