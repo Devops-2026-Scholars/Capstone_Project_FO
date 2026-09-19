@@ -3,6 +3,7 @@ import sys
 import stat
 import subprocess
 from datetime import datetime
+
 def parse_auth_logs(log_path: str):
  """Parses authentication logs to flag failed SSH login attempts."""
  failed_attempts = 0
@@ -14,6 +15,7 @@ def parse_auth_logs(log_path: str):
      if "Failed password" in line or "authentication failure" in line:
        failed_attempts += 1
  return failed_attempts
+
 def audit_file_permissions(file_paths: list[str]):
  """Audits file paths to ensure they are not world-writable."""
  insecure_files = []
@@ -24,10 +26,11 @@ def audit_file_permissions(file_paths: list[str]):
      if st.st_mode & stat.S_IWOTH:
        insecure_files.append(path)
  return insecure_files
+
 def check_system_processes():
  """Executes a subshell command to count running active background daemons."""
  try:
-   result = subprocess.run(["ps", "-e", "--no-headers"], capture_output=True, text=True
+   result = subprocess.run(["ps", "-e", "--no-headers"], capture_output=True, text=True)
    process_count = len(result.stdout.strip().split("\n"))
    return process_count
  except Exception as e:
